@@ -84,6 +84,23 @@ class OptimizePress_SectionsOverride
                         update_post_meta($minionId, '_optimizepress_' . $section, $sections[$section]);
                     }
                 }
+
+                // working on footer
+                if (in_array('footer_area', $_POST['sections'])) {
+                    // checking if there is a Extra large footer elements present on master page
+                    $footer = $wpdb->get_results($wpdb->prepare(
+                        "SELECT type, layout FROM {$wpdb->prefix}optimizepress_post_layouts WHERE post_id = %d AND status = 'publish' AND type = 'footer'",
+                        $masterId
+                    ), ARRAY_A);
+
+                    if (count($footer) > 0) {
+                        foreach ($footer as $foot) {
+                            $foot['post_id'] = $minionId;
+                            $foot['status'] = 'publish';
+                            $wpdb->insert($wpdb->prefix . 'optimizepress_post_layouts', $foot);
+                        }
+                    }
+                }
                 /*
                  * Setting success message
                  */

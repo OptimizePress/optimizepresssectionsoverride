@@ -88,6 +88,7 @@ class OptimizePress_SectionsOverride
                 // working on footer
                 if (in_array('footer_area', $_POST['sections'])) {
                     // checking if there is a Extra large footer elements present on master page
+                    global $wpdb;
                     $footer = $wpdb->get_results($wpdb->prepare(
                         "SELECT type, layout FROM {$wpdb->prefix}optimizepress_post_layouts WHERE post_id = %d AND status = 'publish' AND type = 'footer'",
                         $masterId

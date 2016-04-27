@@ -3,7 +3,7 @@
 Plugin Name: OptimizePress Sections Override
 Plugin URI: http://www.optimizepress.com
 Description: Override header & navigation, typography, footer or colour scheme options on multiple OptimizePress LiveEditor pages with this simple plugin.
-Version: 1.0.0
+Version: 1.1.0
 Author: OptimizePress
 Author URI: http://www.optimizepress.com
 */

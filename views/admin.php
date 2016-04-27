@@ -35,7 +35,8 @@
             <td>
                 <select id="op_master_page" name="master_page" style="width: 100% !important;">
                     <?php while ($liveEditorPages->have_posts()) : $liveEditorPages->the_post(); ?>
-                    <option value="<?php echo esc_attr(get_the_ID()); ?>"><?php the_title(); ?> (#<?php the_ID(); ?>)</option>
+                        <?php $master_page = isset($_POST['master_page']) && $_POST['master_page'] == get_the_ID() ? 'selected' : ''; ?>
+                        <option <?php echo $master_page; ?> value="<?php echo esc_attr(get_the_ID()); ?>"><?php the_title(); ?> (#<?php the_ID(); ?>)</option>
                     <?php endwhile; ?>
                 </select>
             </td>
@@ -45,7 +46,8 @@
             <td>
                 <select id="op_minion_pages" name="minion_pages[]" style="width: 100% !important;" multiple="multiple" size="10">
                     <?php while ($liveEditorPages->have_posts()) : $liveEditorPages->the_post(); ?>
-                    <option value="<?php echo esc_attr(get_the_ID()); ?>"><?php the_title(); ?> (#<?php the_ID(); ?>)</option>
+                         <?php $minion_page = isset($_POST['minion_pages']) && in_array(get_the_ID(), $_POST['minion_pages']) ? 'selected' : ''; ?>
+                        <option <?php echo $minion_page; ?> value="<?php echo esc_attr(get_the_ID()); ?>"><?php the_title(); ?> (#<?php the_ID(); ?>)</option>
                     <?php endwhile; ?>
                 </select>
                 <p class="description">Select multiple pages with Ctrl (or Cmd) + click</p>
@@ -53,12 +55,23 @@
         </tr>
         <tr class="form-required">
             <th scope="row">Sections that will be overwritten</th>
+            <?php
+                if (!isset($_POST['master_page'])) {
+                    $errors[] = 'Select master page';
+                }
+
+                $header = isset($_POST['sections']) && in_array('header_layout', $_POST['sections']) ? 'checked' : '';
+                $footer = isset($_POST['sections']) && in_array('footer_area', $_POST['sections']) ? 'checked' : '';
+                $color = isset($_POST['sections']) && in_array('color_scheme_advanced', $_POST['sections']) ? 'checked' : '';
+                $typography = isset($_POST['sections']) && in_array('typography', $_POST['sections']) ? 'checked' : '';
+                $scripts = isset($_POST['sections']) && in_array('scripts', $_POST['sections']) ? 'checked' : '';
+            ?>
             <td>
-                <label><input type="checkbox" name="sections[]" value="header_layout" /> Header &amp; Navigation</label><br />
-                <label><input type="checkbox" name="sections[]" value="footer_area" /> Footer Area</label><br />
-                <label><input type="checkbox" name="sections[]" value="color_scheme_advanced" /> Colour Schemes</label><br />
-                <label><input type="checkbox" name="sections[]" value="typography" /> Typography</label><br />
-                <label><input type="checkbox" name="sections[]" value="scripts" /> Other Scripts</label><br />
+                <label><input <?php echo $header; ?> type="checkbox" name="sections[]" value="header_layout" /> Header &amp; Navigation</label><br />
+                <label><input <?php echo $footer; ?> type="checkbox" name="sections[]" value="footer_area" /> Footer Area</label><br />
+                <label><input <?php echo $color; ?> type="checkbox" name="sections[]" value="color_scheme_advanced" /> Colour Schemes</label><br />
+                <label><input <?php echo $typography; ?> type="checkbox" name="sections[]" value="typography" /> Typography</label><br />
+                <label><input <?php echo $scripts; ?> type="checkbox" name="sections[]" value="scripts" /> Other Scripts</label><br />
             </td>
         </tr>
     </table>

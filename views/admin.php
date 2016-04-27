@@ -54,11 +54,11 @@
         <tr class="form-required">
             <th scope="row">Sections that will be overwritten</th>
             <td>
-                <p><input type="checkbox" name="sections[]" value="header_layout" /> Header &amp; Navigation</p>
-                <p><input type="checkbox" name="sections[]" value="footer_area" /> Footer Area</p>
-                <p><input type="checkbox" name="sections[]" value="color_scheme_advanced" /> Colour Schemes</p>
-                <p><input type="checkbox" name="sections[]" value="typography" /> Typography</p>
-                <p><input type="checkbox" name="sections[]" value="scripts" /> Other Scripts</p>
+                <label><input type="checkbox" name="sections[]" value="header_layout" /> Header &amp; Navigation</label><br />
+                <label><input type="checkbox" name="sections[]" value="footer_area" /> Footer Area</label><br />
+                <label><input type="checkbox" name="sections[]" value="color_scheme_advanced" /> Colour Schemes</label><br />
+                <label><input type="checkbox" name="sections[]" value="typography" /> Typography</label><br />
+                <label><input type="checkbox" name="sections[]" value="scripts" /> Other Scripts</label><br />
             </td>
         </tr>
     </table>

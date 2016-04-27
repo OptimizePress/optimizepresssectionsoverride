@@ -20,7 +20,7 @@ class OptimizePress_SectionsOverride
      */
     protected function __construct()
     {
-        add_action('admin_menu', array($this, 'registerAdminPage'), 11);
+        add_action('admin_menu', array($this, 'registerAdminPage'), 101);
     }
 
     /**

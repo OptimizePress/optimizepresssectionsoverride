@@ -93,12 +93,25 @@ class OptimizePress_SectionsOverride
                         "SELECT type, layout FROM {$wpdb->prefix}optimizepress_post_layouts WHERE post_id = %d AND status = 'publish' AND type = 'footer'",
                         $masterId
                     ), ARRAY_A);
-
+                    
                     if (count($footer) > 0) {
-                        foreach ($footer as $foot) {
-                            $foot['post_id'] = $minionId;
-                            $foot['status'] = 'publish';
-                            $wpdb->insert($wpdb->prefix . 'optimizepress_post_layouts', $foot);
+                        foreach ($_POST['minion_pages'] as $minion_id) {
+
+                            $duplicate = $wpdb->get_results($wpdb->prepare(
+                                "SELECT post_id from {$wpdb->prefix}optimizepress_post_layouts WHERE post_id = %d AND status = 'publish' AND type = 'footer'",
+                                $minion_id
+                            ), ARRAY_A);
+
+                            $sql = '';
+                            if (count($duplicate) > 0) {
+                                $sql = "UPDATE {$wpdb->prefix}optimizepress_post_layouts SET layout = %s, modified = %s WHERE post_id = %d AND status = 'publish' AND type = 'footer'";
+                                $sql = $wpdb->prepare($sql, $footer[0]['layout'], current_time('mysql'), $minion_id);
+                            } else {
+                                $sql = "INSERT INTO {$wpdb->prefix}optimizepress_post_layouts (post_id, type, layout, status, modified) VALUES (%s,'footer', %s, 'publish', %s)";
+                                $sql = $wpdb->prepare($sql, $minion_id, $footer[0]['layout'], current_time('mysql'));
+                            }
+
+                            $wpdb->query($sql);
                         }
                     }
                 }

@@ -1,9 +1,10 @@
+
 # OptimizePress Sections Override
 Override header & navigation, typography, footer or colour scheme options on multiple OptimizePress LiveEditor pages with this simple plugin.
 
 ## Installation
 1. Click Download ZIP button on the right
-2. Install plugin archive through WordPress' Add plugin screen
+2. Install plugin archive through WordPress 'Add plugin screen'
 3. Activate the plugin
 
 ## Requirements
@@ -14,6 +15,9 @@ Override header & navigation, typography, footer or colour scheme options on mul
 
 
 ## Changelog
+
+### 1.1.1
+* Fixed minor issues 
 
 ### 1.1.0
 * Fixed issues with copying large footer sections
